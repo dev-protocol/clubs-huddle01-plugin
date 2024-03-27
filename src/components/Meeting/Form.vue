@@ -5,7 +5,10 @@ import {
 	onPostCreated,
 	onSetup,
 } from '@devprotocol/clubs-plugin-posts/plugin-helper'
-import { onClickToolbar, emitClickToolbar } from '@devprotocol/clubs-plugin-posts/plugin-helper'
+import {
+	onClickToolbar,
+	emitClickToolbar,
+} from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { connection } from '@devprotocol/clubs-core/connection'
 import type { Meet } from '../../types.ts'
 

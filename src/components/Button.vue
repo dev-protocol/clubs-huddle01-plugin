@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import huddle from '../assets/images/icon-video.svg'
 import huddleDisabled from '../assets/images/huddleDisabled.svg'
-import { onClickToolbar, emitClickToolbar } from '@devprotocol/clubs-plugin-posts/plugin-helper'
+import {
+	onClickToolbar,
+	emitClickToolbar,
+} from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { ref } from 'vue'
 import { onPostCreated } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 
