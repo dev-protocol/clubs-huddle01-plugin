@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import huddle from '../assets/images/icon-video.svg'
 import huddleDisabled from '../assets/images/huddleDisabled.svg'
-import { emitClickToolbar } from '@devprotocol/clubs-plugin-posts/plugin-helper'
+import { onClickToolbar, emitClickToolbar } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { ref } from 'vue'
 import { onPostCreated } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 
@@ -10,9 +10,13 @@ const isOpened = ref<boolean>(false)
 const onClickImage = () => {
 	if (isOpened.value === false) {
 		emitClickToolbar('onClickMeetEvent')
+		isOpened.value = true
 	}
 }
 onPostCreated((post: any) => {
+	isOpened.value = false
+})
+onClickToolbar('onRemoveMeetEvent', () => {
 	isOpened.value = false
 })
 </script>
