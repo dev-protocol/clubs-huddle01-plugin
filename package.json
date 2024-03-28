@@ -1,8 +1,8 @@
 {
-	"name": "@devprotocol/clubs-plugin-posts-voting",
-	"version": "0.6.0",
+	"name": "@devprotocol/clubs-huddle01-plugin",
+	"version": "0.1.0",
 	"type": "module",
-	"description": "Template repository for using TypeScript",
+	"description": "Repository for using Clubs-Huddle01 Plugin",
 	"main": "dist/index.js",
 	"exports": {
 		".": {
@@ -93,10 +93,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/dev-protocol/clubs-plugin-posts-voting.git"
+		"url": "git+ssh://git@github.com/dev-protocol/clubs-huddle01-plugin.git"
 	},
 	"bugs": {
-		"url": "https://github.com/dev-protocol/clubs-plugin-posts-voting/issues"
+		"url": "https://github.com/dev-protocol/clubs-huddle01-plugin/issues"
 	},
-	"homepage": "https://github.com/dev-protocol/clubs-plugin-posts-voting#readme"
+	"homepage": "https://github.com/dev-protocol/clubs-huddle01-plugin#readme"
 }
