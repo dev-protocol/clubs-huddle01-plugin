@@ -1,4 +1,4 @@
-# Posts Voting
+# Posts Meetings/Spaces
 
 ## Local development
 
