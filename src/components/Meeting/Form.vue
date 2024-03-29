@@ -14,23 +14,20 @@ import type { Meet } from '../../types.ts'
 
 onSetup(async (post) => {
 	// optionsのpollにundefinedがある場合はreturnする
-	if (hostWallets.value.some((option) => option.address === undefined)) {
+	if (hostWallets.value.some((option) => option.address === undefined) || isMeetOpen.value !== true) {
 		return post
 	}
+	console.log({isMeetOpen})
 
-	let meetingLink: string | undefined = undefined
-	// intention to only call when form is opened, otherwise it will call the api with each key stroke
-	if (isMeetOpen.value === true) {
-		meetingLink = await axios
-			.post(`/api/devprotocol:clubs:huddle:plugin/schedule`, {
-				hostWallets: hostWallets.value.map((option) => option.address),
+	const meetingLink = await axios
+	.post(`/api/devprotocol:clubs:huddle:plugin/schedule`, {
+			hostWallets: hostWallets.value.map((option) => option.address),
 				roomType: roomType.value,
 				description: description.value,
 				muteOnEntry: muteOnEntry.value,
 				videoOnEntry: videoOnEntry.value,
 			})
 			.then((res) => res.data.data.meetingLink)
-	}
 
 	const meet: Meet = {
 		hostWallets: hostWallets.value.map((option) => {
