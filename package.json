@@ -1,5 +1,5 @@
 {
-	"name": "@devprotocol/clubs-huddle01-plugin",
+	"name": "@devprotocol/clubs-plugin-huddle01",
 	"version": "0.1.0",
 	"type": "module",
 	"description": "Repository for using Clubs-Huddle01 Plugin",
