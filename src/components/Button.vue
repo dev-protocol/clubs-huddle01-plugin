@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import huddle from '../assets/images/icon-video.svg'
-import huddleDisabled from '../assets/images/huddleDisabled.svg'
 import {
 	onClickToolbar,
 	emitClickToolbar,
 } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { ref } from 'vue'
 import { onPostCreated } from '@devprotocol/clubs-plugin-posts/plugin-helper'
+import VideoCamera from './Icons/VideoCamera.vue'
 
 const isOpened = ref<boolean>(false)
 
@@ -26,15 +25,11 @@ onClickToolbar('onRemoveMeetEvent', () => {
 
 <template>
 	<button
-		class="inline-flex items-center rounded-full shadow-sm"
-		:class="[isOpened ? 'cursor-default' : 'cursor-pointer']"
+		class="inline-flex items-center rounded-full text-[#236BFE]"
+		:class="[isOpened ? 'cursor-default opacity-50' : 'cursor-pointer']"
 		type="button"
 		@click="onClickImage"
 	>
-		<img
-			class="w-7"
-			:src="isOpened === false ? huddle.src : huddleDisabled.src"
-			alt="paper-airplane"
-		/>
+		<VideoCamera stroke-width="2" class="w-7 h-7" />
 	</button>
 </template>
