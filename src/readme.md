@@ -8,9 +8,9 @@ Unlock a new realm of communication with features designed to foster deeper conn
 
 - Membership Only Rooms: Cultivate exclusivity and value with meetings that are gated by membership status, ensuring that every conversation happens in a community of committed members who share a common interest and passion with support for up to 1000 participants.
 
-    - Video Room: Engage more personally and powerfully with high-quality video meetings that make every participant feel like they’re in the same room, turning each interaction into a face-to-face experience.
+  - Video Room: Engage more personally and powerfully with high-quality video meetings that make every participant feel like they’re in the same room, turning each interaction into a face-to-face experience.
 
-    - Audio Room: Offer flexibility and ease with audio spaces that allow members to connect, share, and discuss in a more relaxed and accessible format, perfect for casual conversations or when on the go.
+  - Audio Room: Offer flexibility and ease with audio spaces that allow members to connect, share, and discuss in a more relaxed and accessible format, perfect for casual conversations or when on the go.
 
 - Multiple Hosts Capability: Amplify your community’s voice by enabling multiple hosts in a single session, fostering a collaborative and inclusive environment where ideas and discussions flow freely.
 
