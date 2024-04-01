@@ -7,6 +7,9 @@ import type {
 import { ClubsPluginCategory } from '@devprotocol/clubs-core'
 import { SlotName } from '@devprotocol/clubs-plugin-posts'
 import { meetingHandler } from './ApiHandler'
+import Icon from './assets/Icon.png'
+import Preview1 from './assets/huddle01-1.png'
+import Preview2 from './assets/huddle01-2.png'
 import Readme from './readme.astro'
 import Button from './components/Button.astro'
 import AfterContentForm from './components/edit-after-content-form.astro'
@@ -34,6 +37,8 @@ export const meta: ClubsPluginMeta = {
 	displayName: 'Huddle01',
 	category: ClubsPluginCategory.Uncategorized,
 	description: '',
+	icon: Icon,
+	previewImages: [Preview1, Preview2],
 	readme: Readme,
 } satisfies ClubsPluginMeta
 
