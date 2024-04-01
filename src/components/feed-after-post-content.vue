@@ -1,17 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { currentPost } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import Join from './Meeting/Join.vue'
 import type { Posts } from '@devprotocol/clubs-plugin-posts'
 import type { Meet } from '../types.ts'
 import { connection } from '@devprotocol/clubs-core/connection'
+import { whenDefined, type UndefinedOr } from '@devprotocol/util-ts'
 
 const props = defineProps(['slotId', 'feedId'])
 
 const meeting = ref<Element>()
-let isMasked = ref<boolean | undefined>(undefined)
-const currentPostInfo = ref<any>()
-const currentMeet = ref<Meet>()
+const isMasked = computed<boolean | undefined>(() =>
+	whenDefined(currentPostInfo.value, (post) => post.masked),
+)
+const currentPostInfo = ref<Posts>()
+const currentMeet = computed(() => {
+	return whenDefined(
+		currentPostInfo.value,
+		(post) =>
+			post.options.find((option: any) => option.key === '#meet')
+				?.value as UndefinedOr<Meet>,
+	)
+})
 const address = ref<string | undefined>(undefined)
 
 connection().account.subscribe((_account: string | undefined) => {
@@ -25,25 +35,7 @@ onMounted(async () => {
 
 	currentPost((data: Posts) => {
 		currentPostInfo.value = data
-
-		isMasked.value = data.masked
 	}, meeting.value)
-
-	if (!currentPostInfo.value) {
-		return
-	}
-
-	const meetOption = currentPostInfo.value.options.find(
-		(option: any) => option.key === '#meet',
-	)
-
-	console.log({ meetOption })
-
-	if (!meetOption) {
-		return
-	}
-
-	currentMeet.value = meetOption.value as Meet
 })
 const redirectToUrl = (url: string | undefined) => {
 	window.open(url, '_blank')
