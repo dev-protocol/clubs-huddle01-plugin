@@ -10,31 +10,32 @@ export const formatUnixTimestampToISO = (timestamp: number) => {
 }
 
 export const formatISOTimestamp = (isoTimestamp: string) => {
-    const date = new Date(isoTimestamp);
+	const date = new Date(isoTimestamp)
 
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed in JavaScript
-    const year = date.getFullYear();
+	const day = String(date.getDate()).padStart(2, '0')
+	const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-indexed in JavaScript
+	const year = date.getFullYear()
 
-    
-    const hours12 = date.getHours() % 12 || 12; // Converts 0 to 12 for midnight
-    const amPm = date.getHours() >= 12 ? 'PM' : 'AM';
+	const hours12 = date.getHours() % 12 || 12 // Converts 0 to 12 for midnight
+	const amPm = date.getHours() >= 12 ? 'PM' : 'AM'
 
-    const hours = String(hours12).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+	const hours = String(hours12).padStart(2, '0')
+	const minutes = String(date.getMinutes()).padStart(2, '0')
 
-    const timeZone = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).resolvedOptions().timeZone;
+	const timeZone = new Intl.DateTimeFormat('en-US', {
+		timeZoneName: 'short',
+	}).resolvedOptions().timeZone
 
-    return `${hours}:${minutes} ${amPm} (${day}:${month}:${year}) ${timeZone}`;
-};
+	return `${hours}:${minutes} ${amPm} (${day}:${month}:${year}) ${timeZone}`
+}
 
 export const isFutureTimestamp = (isoTimestamp: string) => {
-    if(isoTimestamp === undefined) {
-        return true;
-    }
-    const inputDate = new Date(isoTimestamp);
+	if (isoTimestamp === undefined) {
+		return true
+	}
+	const inputDate = new Date(isoTimestamp)
 
-    const currentDate = new Date();
-    // Return true if the input date is in the future, false otherwise
-    return inputDate > currentDate;
+	const currentDate = new Date()
+	// Return true if the input date is in the future, false otherwise
+	return inputDate > currentDate
 }
