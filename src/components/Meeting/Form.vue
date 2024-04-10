@@ -10,7 +10,7 @@ import {
 	emitClickToolbar,
 } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { connection } from '@devprotocol/clubs-core/connection'
-import { formatUnixTimestampToISO } from '/Users/shubhamkukreti/Documents/devprotocol/clubs-huddle01-plugin/src/fixtures'
+import { formatUnixTimestampToISO } from '../../fixtures'
 import { whenDefined, type UndefinedOr } from '@devprotocol/util-ts'
 import type { Meet } from '../../types.ts'
 

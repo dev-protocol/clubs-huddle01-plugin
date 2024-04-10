@@ -30,6 +30,6 @@ onClickToolbar('onRemoveMeetEvent', () => {
 		type="button"
 		@click="onClickImage"
 	>
-		<VideoCamera stroke-width="2" class="w-7 h-7" />
+		<VideoCamera stroke-width="2" class="w-7 h-7" iconType="VIDEO" />
 	</button>
 </template>
