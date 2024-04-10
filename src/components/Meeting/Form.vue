@@ -33,6 +33,7 @@ onSetup(async (post) => {
 			videoOnEntry: videoOnEntry.value,
 			startTime: startTime.value,
 			expiryTime: expiryTime.value,
+			tokenGated: tokenGated.value,
 		})
 		.then((res) => res.data.data.meetingLink)
 
@@ -75,6 +76,7 @@ const roomType = ref<'AUDIO' | 'VIDEO'>('VIDEO')
 const description = ref<string | undefined>(undefined)
 const muteOnEntry = ref<boolean>(true)
 const videoOnEntry = ref<boolean>(true)
+const tokenGated = ref<boolean>(true)
 
 const minimumStartTime = ref<string>(
 	formatUnixTimestampToISO(Date.now() / 1000),
@@ -270,22 +272,42 @@ watch(expiryTime, (newValue) => {
 			</div>
 		</div>
 		<div class="py-4 px-4 border-t border-gray-400">
-			<p class="mb-2 mr-4 text-gray-400 font-bold">Entry Settings</p>
-			<p class="uppercase mb-2 mr-4 text-gray-400 font-bold">Camera</p>
-			<label class="relative inline-flex items-center cursor-pointer">
-				<input v-model="videoOnEntry" type="checkbox" class="sr-only peer" />
-				<span
-					class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-				></span>
-			</label>
-			<p class="uppercase mb-2 mr-4 text-gray-400 font-bold">Mute</p>
-			<label class="relative inline-flex items-center cursor-pointer">
-				<input v-model="muteOnEntry" type="checkbox" class="sr-only peer" />
-				<span
-					class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-				></span>
-			</label>
+			<p class="mb-2 text-gray-400 font-bold">Entry Settings</p>
+			<div class="flex flex-wrap justify-between items-end">
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Camera</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input
+							v-model="videoOnEntry"
+							type="checkbox"
+							class="sr-only peer"
+						/>
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Mute</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input v-model="muteOnEntry" type="checkbox" class="sr-only peer" />
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Gated</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input v-model="tokenGated" type="checkbox" class="sr-only peer" />
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+			</div>
 		</div>
+
 		<div class="border-t border-gray-400">
 			<button
 				class="py-4 w-full border text-red-500"
