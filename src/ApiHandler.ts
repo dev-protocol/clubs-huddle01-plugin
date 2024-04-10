@@ -39,29 +39,29 @@ export const meetingHandler = async ({
 		tokenGated,
 	)
 	const requestBody = tokenGated
-	? {
-		title: 'Club-Huddle-Plugin:Token Gated Meeting Room',
-		tokenType: 'ERC721',
-		chain: 'POLYGON',
-		contractAddress: ['0x89904De861CDEd2567695271A511B3556659FfA2'],
-		roomType,
-		description,
-		muteOnEntry,
-		videoOnEntry,
-		hostWallets,
-		startTime,
-		expiryTime,
-	  }
-	: {
-		title: 'Club-Huddle-Plugin:Meeting Room',
-		roomType,
-		description,
-		muteOnEntry,
-		videoOnEntry,
-		hostWallets,
-		startTime,
-		expiryTime,
-	  };
+		? {
+				title: 'Club-Huddle-Plugin:Token Gated Meeting Room',
+				tokenType: 'ERC721',
+				chain: 'POLYGON',
+				contractAddress: ['0x89904De861CDEd2567695271A511B3556659FfA2'],
+				roomType,
+				description,
+				muteOnEntry,
+				videoOnEntry,
+				hostWallets,
+				startTime,
+				expiryTime,
+			}
+		: {
+				title: 'Club-Huddle-Plugin:Meeting Room',
+				roomType,
+				description,
+				muteOnEntry,
+				videoOnEntry,
+				hostWallets,
+				startTime,
+				expiryTime,
+			}
 
 	const response = await axios.post(
 		'https://api.huddle01.com/api/v1/create-iframe-room',
