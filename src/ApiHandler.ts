@@ -16,10 +16,25 @@ export const meetingHandler = async ({
 	request,
 }: Readonly<{ request: Request }>) => {
 	// eslint-disable-next-line functional/no-expression-statements
-	const { hostWallets, roomType, description, muteOnEntry, videoOnEntry, startTime, expiryTime } =
-		(await request.json()) as MeetingRequestJson
+	const {
+		hostWallets,
+		roomType,
+		description,
+		muteOnEntry,
+		videoOnEntry,
+		startTime,
+		expiryTime,
+	} = (await request.json()) as MeetingRequestJson
 	// eslint-disable-next-line functional/no-expression-statements
-	console.log(hostWallets, roomType, description, muteOnEntry, videoOnEntry, startTime, expiryTime)
+	console.log(
+		hostWallets,
+		roomType,
+		description,
+		muteOnEntry,
+		videoOnEntry,
+		startTime,
+		expiryTime,
+	)
 	const response = await axios.post(
 		'https://api.huddle01.com/api/v1/create-iframe-room',
 		{

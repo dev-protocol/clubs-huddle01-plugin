@@ -76,7 +76,9 @@ const description = ref<string | undefined>(undefined)
 const muteOnEntry = ref<boolean>(true)
 const videoOnEntry = ref<boolean>(true)
 
-const minimumStartTime = ref<string>(formatUnixTimestampToISO(Date.now() / 1000))
+const minimumStartTime = ref<string>(
+	formatUnixTimestampToISO(Date.now() / 1000),
+)
 const startTimeLocal = ref<string>(minimumStartTime.value)
 const startTime = computed(() => {
 	if (startTimeLocal === undefined) {
@@ -157,7 +159,7 @@ watch(isMeetOpen, (isOpen) => {
 })
 
 watch(startTime, (newValue) => {
-    console.log('Start Time changed:', newValue)
+	console.log('Start Time changed:', newValue)
 })
 
 watch(expiryTime, (newValue) => {
@@ -237,36 +239,36 @@ watch(expiryTime, (newValue) => {
 			</label>
 		</div>
 		<div class="flex flex-row gap-4 py-4 px-4">
-            <div class="flex flex-col">
-                <label
-                    class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
-                    for="start-time"
-                >
-                    Start Time
-                </label>
-                <input
-                    id="start-time"
-                    v-model="startTimeLocal"
-                    type="datetime-local"
-                    class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+			<div class="flex flex-col">
+				<label
+					class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
+					for="start-time"
+				>
+					Start Time
+				</label>
+				<input
+					id="start-time"
+					v-model="startTimeLocal"
+					type="datetime-local"
+					class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 					:min="minimumStartTime"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label
-                    class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
-                    for="expiry-time"
-                >
-                    Expiry Time
-                </label>
-                <input
-                    id="expiry-time"
-                    v-model="expiryTimeLocal"
-                    type="datetime-local"
-                    class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                />
-            </div>
-        </div>
+				/>
+			</div>
+			<div class="flex flex-col">
+				<label
+					class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
+					for="expiry-time"
+				>
+					Expiry Time
+				</label>
+				<input
+					id="expiry-time"
+					v-model="expiryTimeLocal"
+					type="datetime-local"
+					class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+				/>
+			</div>
+		</div>
 		<div class="py-4 px-4 border-t border-gray-400">
 			<p class="mb-2 mr-4 text-gray-400 font-bold">Entry Settings</p>
 			<p class="uppercase mb-2 mr-4 text-gray-400 font-bold">Camera</p>
