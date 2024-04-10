@@ -6,6 +6,8 @@ export type MeetingRequestJson = Readonly<{
 	description: string
 	muteOnEntry: boolean
 	videoOnEntry: boolean
+	startTime: string
+	expiryTime: string
 }>
 
 const API_KEY = process.env.HUDDLE_API_KEY
@@ -14,10 +16,10 @@ export const meetingHandler = async ({
 	request,
 }: Readonly<{ request: Request }>) => {
 	// eslint-disable-next-line functional/no-expression-statements
-	const { hostWallets, roomType, description, muteOnEntry, videoOnEntry } =
+	const { hostWallets, roomType, description, muteOnEntry, videoOnEntry, startTime, expiryTime } =
 		(await request.json()) as MeetingRequestJson
 	// eslint-disable-next-line functional/no-expression-statements
-	console.log(hostWallets, roomType, description, muteOnEntry, videoOnEntry)
+	console.log(hostWallets, roomType, description, muteOnEntry, videoOnEntry, startTime, expiryTime)
 	const response = await axios.post(
 		'https://api.huddle01.com/api/v1/create-iframe-room',
 		{
@@ -30,6 +32,8 @@ export const meetingHandler = async ({
 			muteOnEntry: muteOnEntry,
 			videoOnEntry: videoOnEntry,
 			hostWallets: hostWallets,
+			startTime: startTime,
+			expiryTime: expiryTime,
 		},
 		{
 			headers: {
