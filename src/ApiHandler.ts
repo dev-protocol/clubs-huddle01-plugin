@@ -8,6 +8,7 @@ export type MeetingRequestJson = Readonly<{
 	videoOnEntry: boolean
 	startTime: string
 	expiryTime: string
+	tokenGated: boolean
 }>
 
 const API_KEY = process.env.HUDDLE_API_KEY
@@ -24,6 +25,7 @@ export const meetingHandler = async ({
 		videoOnEntry,
 		startTime,
 		expiryTime,
+		tokenGated,
 	} = (await request.json()) as MeetingRequestJson
 	// eslint-disable-next-line functional/no-expression-statements
 	console.log(
@@ -34,22 +36,36 @@ export const meetingHandler = async ({
 		videoOnEntry,
 		startTime,
 		expiryTime,
+		tokenGated,
 	)
+	const requestBody = tokenGated
+	? {
+		title: 'Club-Huddle-Plugin:Token Gated Meeting Room',
+		tokenType: 'ERC721',
+		chain: 'POLYGON',
+		contractAddress: ['0x89904De861CDEd2567695271A511B3556659FfA2'],
+		roomType,
+		description,
+		muteOnEntry,
+		videoOnEntry,
+		hostWallets,
+		startTime,
+		expiryTime,
+	  }
+	: {
+		title: 'Club-Huddle-Plugin:Meeting Room',
+		roomType,
+		description,
+		muteOnEntry,
+		videoOnEntry,
+		hostWallets,
+		startTime,
+		expiryTime,
+	  };
+
 	const response = await axios.post(
 		'https://api.huddle01.com/api/v1/create-iframe-room',
-		{
-			title: 'Token Gated',
-			tokenType: 'ERC721',
-			chain: 'POLYGON',
-			contractAddress: ['0x89904De861CDEd2567695271A511B3556659FfA2'],
-			roomType: roomType,
-			description: description,
-			muteOnEntry: muteOnEntry,
-			videoOnEntry: videoOnEntry,
-			hostWallets: hostWallets,
-			startTime: startTime,
-			expiryTime: expiryTime,
-		},
+		requestBody,
 		{
 			headers: {
 				'Content-Type': 'application/json',
