@@ -135,8 +135,8 @@ onPostCreated((post: any) => {
 	startTimeLocal.value = minimumStartTime.value
 	expiryTimeLocal.value = ''
 	connection().account.subscribe((_account: string) => {
-	address.value = _account
-	hostWallets.value[0].address = _account
+		address.value = _account
+		hostWallets.value[0].address = _account
 	})
 })
 
