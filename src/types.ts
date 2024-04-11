@@ -20,4 +20,6 @@ export interface Meet {
 	muteOnEntry: boolean
 	videoOnEntry: boolean
 	meetingLink: string | undefined
+	startTime: string | undefined
+	expiryTime: string | undefined
 }

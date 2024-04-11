@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import axios from 'axios'
 import {
 	onPostCreated,
@@ -10,6 +10,8 @@ import {
 	emitClickToolbar,
 } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import { connection } from '@devprotocol/clubs-core/connection'
+import { formatUnixTimestampToISO } from '../../fixtures'
+import { whenDefined, type UndefinedOr } from '@devprotocol/util-ts'
 import type { Meet } from '../../types.ts'
 
 onSetup(async (post) => {
@@ -29,6 +31,9 @@ onSetup(async (post) => {
 			description: description.value,
 			muteOnEntry: muteOnEntry.value,
 			videoOnEntry: videoOnEntry.value,
+			startTime: startTime.value,
+			expiryTime: expiryTime.value,
+			tokenGated: tokenGated.value,
 		})
 		.then((res) => res.data.data.meetingLink)
 
@@ -44,6 +49,8 @@ onSetup(async (post) => {
 		muteOnEntry: muteOnEntry.value,
 		videoOnEntry: videoOnEntry.value,
 		meetingLink: meetingLink,
+		startTime: startTime.value,
+		expiryTime: expiryTime.value,
 	}
 
 	console.log({ meet })
@@ -69,6 +76,28 @@ const roomType = ref<'AUDIO' | 'VIDEO'>('VIDEO')
 const description = ref<string | undefined>(undefined)
 const muteOnEntry = ref<boolean>(true)
 const videoOnEntry = ref<boolean>(true)
+const tokenGated = ref<boolean>(true)
+
+const minimumStartTime = ref<string>(
+	formatUnixTimestampToISO(Date.now() / 1000),
+)
+const startTimeLocal = ref<string>(minimumStartTime.value)
+const startTime = computed(() => {
+	if (startTimeLocal === undefined) {
+		return undefined
+	}
+	const start = new Date(startTimeLocal.value)
+	return start.toISOString()
+})
+
+const expiryTimeLocal = ref<string>('')
+const expiryTime = computed(() => {
+	if (expiryTimeLocal.value === '') {
+		return undefined
+	}
+	const expiry = new Date(expiryTimeLocal.value)
+	return expiry.toISOString()
+})
 
 const MAX_OPTIONS = 4
 
@@ -103,6 +132,12 @@ onPostCreated((post: any) => {
 	muteOnEntry.value = true
 	videoOnEntry.value = true
 	hostWallets.value = [{ id: 1, address: '' }]
+	startTimeLocal.value = minimumStartTime.value
+	expiryTimeLocal.value = ''
+	connection().account.subscribe((_account: string) => {
+		address.value = _account
+		hostWallets.value[0].address = _account
+	})
 })
 
 const handleClickRemovePoll = () => {
@@ -127,6 +162,14 @@ watch(isMeetOpen, (isOpen) => {
 			}
 		})
 	}
+})
+
+watch(startTime, (newValue) => {
+	console.log('Start Time changed:', newValue)
+})
+
+watch(expiryTime, (newValue) => {
+	console.log('Expiry Time changed:', newValue)
 })
 </script>
 <template>
@@ -201,23 +244,74 @@ watch(isMeetOpen, (isOpen) => {
 				AUDIO
 			</label>
 		</div>
-		<div class="py-4 px-4 border-t border-gray-400">
-			<p class="mb-2 mr-4 text-gray-400 font-bold">Entry Settings</p>
-			<p class="uppercase mb-2 mr-4 text-gray-400 font-bold">Camera</p>
-			<label class="relative inline-flex items-center cursor-pointer">
-				<input v-model="videoOnEntry" type="checkbox" class="sr-only peer" />
-				<span
-					class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-				></span>
-			</label>
-			<p class="uppercase mb-2 mr-4 text-gray-400 font-bold">Mute</p>
-			<label class="relative inline-flex items-center cursor-pointer">
-				<input v-model="muteOnEntry" type="checkbox" class="sr-only peer" />
-				<span
-					class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-				></span>
-			</label>
+		<div class="flex flex-row gap-4 py-4 px-4">
+			<div class="flex flex-col">
+				<label
+					class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
+					for="start-time"
+				>
+					Start Time
+				</label>
+				<input
+					id="start-time"
+					v-model="startTimeLocal"
+					type="datetime-local"
+					class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+					:min="minimumStartTime"
+				/>
+			</div>
+			<div class="flex flex-col">
+				<label
+					class="block mb-2 uppercase tracking-wide text-gray-400 text-xs font-bold"
+					for="expiry-time"
+				>
+					Expiry Time
+				</label>
+				<input
+					id="expiry-time"
+					v-model="expiryTimeLocal"
+					type="datetime-local"
+					class="appearance-none block py-3 px-4 w-full text-gray-700 border border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+				/>
+			</div>
 		</div>
+		<div class="py-4 px-4 border-t border-gray-400">
+			<p class="mb-2 text-gray-400 font-bold">Entry Settings</p>
+			<div class="flex flex-wrap justify-between items-end">
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Camera</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input
+							v-model="videoOnEntry"
+							type="checkbox"
+							class="sr-only peer"
+						/>
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Mute</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input v-model="muteOnEntry" type="checkbox" class="sr-only peer" />
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+				<div class="flex-1 min-w-[33%]">
+					<p class="uppercase text-gray-400 font-bold">Gated</p>
+					<label class="relative inline-flex items-center cursor-pointer">
+						<input v-model="tokenGated" type="checkbox" class="sr-only peer" />
+						<span
+							class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+						></span>
+					</label>
+				</div>
+			</div>
+		</div>
+
 		<div class="border-t border-gray-400">
 			<button
 				class="py-4 w-full border text-red-500"

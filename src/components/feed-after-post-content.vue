@@ -49,6 +49,8 @@ const redirectToUrl = (url: string | undefined) => {
 					:redirectToUrl="redirectToUrl"
 					:meetingLink="currentMeet.meetingLink"
 					:roomType="currentMeet.roomType"
+					:startTime="currentMeet.startTime"
+					:expiryTime="currentMeet.expiryTime"
 				/>
 			</section>
 		</div>
