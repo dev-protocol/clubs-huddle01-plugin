@@ -134,6 +134,10 @@ onPostCreated((post: any) => {
 	hostWallets.value = [{ id: 1, address: '' }]
 	startTimeLocal.value = minimumStartTime.value
 	expiryTimeLocal.value = ''
+	connection().account.subscribe((_account: string) => {
+	address.value = _account
+	hostWallets.value[0].address = _account
+	})
 })
 
 const handleClickRemovePoll = () => {
