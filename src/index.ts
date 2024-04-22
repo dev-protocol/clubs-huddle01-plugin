@@ -37,7 +37,7 @@ export const meta: ClubsPluginMeta = {
 	id: 'devprotocol:clubs:huddle:plugin',
 	displayName: 'Huddle01',
 	category: ClubsPluginCategory.Uncategorized,
-	description: '',
+	description: 'Real Time Communication (RTC) Plugin',
 	icon: Icon,
 	previewImages: [Preview1, Preview2, Preview3],
 	readme: Readme,
