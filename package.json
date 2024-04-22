@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/huddle01-clubs-plugin",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"type": "module",
 	"description": "Repository for using Clubs-Huddle01 Plugin",
 	"main": "dist/index.js",
