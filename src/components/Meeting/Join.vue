@@ -4,60 +4,65 @@ import VideoCamera from '../Icons/VideoCamera.vue'
 import { formatISOTimestamp, isFutureTimestamp } from '../../fixtures'
 
 const props = defineProps<{
-  redirectToUrl: (meetingLink: string | undefined) => void
-  meetingLink: string | undefined
-  roomType: string
-  startTime: string | undefined
-  expiryTime: string | undefined
+	redirectToUrl: (meetingLink: string | undefined) => void
+	meetingLink: string | undefined
+	roomType: string
+	startTime: string | undefined
+	expiryTime: string | undefined
 }>()
 
-
-const currentTime = ref(new Date());
+const currentTime = ref(new Date())
 
 // Update current time every minute
 const updateCurrentTime = () => {
-  currentTime.value = new Date();
-};
-let timer: NodeJS.Timeout | undefined;
+	currentTime.value = new Date()
+}
+let timer: NodeJS.Timeout | undefined
 onMounted(() => {
-  timer = setInterval(updateCurrentTime, 15000);  // 15 seconds
-});
+	timer = setInterval(updateCurrentTime, 15000) // 15 seconds
+})
 onUnmounted(() => {
-  clearInterval(timer);
-});
+	clearInterval(timer)
+})
 
 // Computed properties
 const startTimeValid = computed(() => {
-  return props.startTime && !isNaN(new Date(props.startTime).getTime());
-});
+	return props.startTime && !isNaN(new Date(props.startTime).getTime())
+})
 const expiryTimeValid = computed(() => {
-  return props.expiryTime && !isNaN(new Date(props.expiryTime).getTime());
-});
+	return props.expiryTime && !isNaN(new Date(props.expiryTime).getTime())
+})
 
 const meetingHasStarted = computed(() => {
-  return startTimeValid.value && !isFutureTimestamp(props.startTime as string, currentTime.value);
-});
+	return (
+		startTimeValid.value &&
+		!isFutureTimestamp(props.startTime as string, currentTime.value)
+	)
+})
 const meetingIsActive = computed(() => {
-  return startTimeValid.value && 
-         (!expiryTimeValid.value || isFutureTimestamp(props.expiryTime as string, currentTime.value));
-});
+	return (
+		startTimeValid.value &&
+		(!expiryTimeValid.value ||
+			isFutureTimestamp(props.expiryTime as string, currentTime.value))
+	)
+})
 
 const roomTypeDescription = computed(() => {
-  return `${props.roomType === 'VIDEO' ? 'Video Call' : 'Audio Space'}`;
-});
+	return `${props.roomType === 'VIDEO' ? 'Video Call' : 'Audio Space'}`
+})
 
 const meetingStatusMessage = computed(() => {
-  if (!startTimeValid.value) {
-    return 'Unknown Start Time';
-  }
-  if (meetingHasStarted.value && !meetingIsActive.value) {
-    return 'Expired';
-  }
-  if (!meetingHasStarted.value) {
-    return `Starts @ ${formatISOTimestamp(props.startTime as string)}`;
-  }
-  return `Ends @ ${formatISOTimestamp(props.expiryTime as string)}`;
-});
+	if (!startTimeValid.value) {
+		return 'Unknown Start Time'
+	}
+	if (meetingHasStarted.value && !meetingIsActive.value) {
+		return 'Expired'
+	}
+	if (!meetingHasStarted.value) {
+		return `Starts @ ${formatISOTimestamp(props.startTime as string)}`
+	}
+	return `Ends @ ${formatISOTimestamp(props.expiryTime as string)}`
+})
 </script>
 
 <template>
