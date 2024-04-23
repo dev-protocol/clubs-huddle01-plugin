@@ -49,8 +49,7 @@ const meetingStatusMessage = computed(() => {
 </script>
 <template>
 	<button
-		v-if="((meetingHasStarted && meetingIsActive))
-		"
+		v-if="meetingHasStarted && meetingIsActive"
 		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border border-green-500 rounded-full bg-green-500 outline hover:outline-green-500 outline-2 outline-offset-2 transition-all text-white"
 		@click="
 			() => {
@@ -65,12 +64,13 @@ const meetingStatusMessage = computed(() => {
 	<div
 		v-else
 		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border rounded-full outline outline-2 outline-offset-2 transition-all text-white"
-		:class="{ 'bg-gray-500': !meetingIsActive ,
-		'border-gray-500': !meetingIsActive,
-		'hover:outline-gray-500': !meetingIsActive,
-		'bg-[#236BFE]': meetingIsActive,
-		'border-[#236BFE]': meetingIsActive,
-		'hover:outline-[#236BFE]': meetingIsActive
+		:class="{
+			'bg-gray-500': !meetingIsActive,
+			'border-gray-500': !meetingIsActive,
+			'hover:outline-gray-500': !meetingIsActive,
+			'bg-[#236BFE]': meetingIsActive,
+			'border-[#236BFE]': meetingIsActive,
+			'hover:outline-[#236BFE]': meetingIsActive,
 		}"
 	>
 		<VideoCamera :solid="true" :iconType="`${roomType}`" />
