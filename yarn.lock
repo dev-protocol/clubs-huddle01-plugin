@@ -470,13 +470,13 @@
     svelte "^4.0.0"
     vue "^3.2.0"
 
-"@devprotocol/clubs-plugin-posts@0.20.4":
-  version "0.20.4"
-  resolved "https://registry.yarnpkg.com/@devprotocol/clubs-plugin-posts/-/clubs-plugin-posts-0.20.4.tgz#116aa5c5228edc7f3b2492b0020fd4f449ecdcb7"
-  integrity sha512-q1kC/xPWZBWKa1bHcSQvuPishewTq0evZdS21ukx1c1UBZcASlBabKtAjl/M6JhRpBNjZj/ljr1Iz4yKXXJKzQ==
+"@devprotocol/clubs-plugin-posts@0.20.9":
+  version "0.20.9"
+  resolved "https://registry.yarnpkg.com/@devprotocol/clubs-plugin-posts/-/clubs-plugin-posts-0.20.9.tgz#6517b4b700080d616ef84de842f8252f4571ea55"
+  integrity sha512-Djn+vzxU2S0HJaubTKsYgD1lukiS59ubtq3kspyNcOjYWHPND0ouf8AtswJPrtrAzMbPgj+kj6nzGJWxCB0UTg==
   dependencies:
     "@boringer-avatars/vue3" "^0.2.1"
-    "@devprotocol/dev-kit" "8.6.0"
+    "@devprotocol/dev-kit" "8.6.1"
     "@devprotocol/util-ts" "4.0.0"
     bignumber.js "9.1.2"
     dayjs "^1.11.8"
@@ -487,18 +487,8 @@
     photoswipe "5.4.3"
     ramda "0.30.0"
     redis "^4.6.7"
-    sass "1.77.0"
+    sass "1.77.2"
     uuid "^9.0.0"
-
-"@devprotocol/dev-kit@8.6.0":
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.6.0.tgz#da969de08b1e9d8fee44d9f9156a7542d8fc95f3"
-  integrity sha512-9u5YAn+GptEHsYulkSCojkDIqCHFVZnvETfP/nN/CQnuP9KjS7Aq64y2SiQz79rzLXDEIqxrCUHX9DUFqi6aWA==
-  dependencies:
-    "@devprotocol/util-ts" "4.0.0"
-    bignumber.js "9.1.2"
-    js-base64 "^3.7.2"
-    ramda "^0.29.0"
 
 "@devprotocol/dev-kit@8.6.1":
   version "8.6.1"
@@ -5551,15 +5541,6 @@ sass-formatter@^0.7.6:
   integrity sha512-CWZ8XiSim+fJVG0cFLStwDvft1VI7uvXdCNJYXhDvowiv+DsbD1nXLiQ4zrE5UBvj5DWZJ93cwN0NX5PMsr1Pw==
   dependencies:
     suf-log "^2.5.3"
-
-sass@1.77.0:
-  version "1.77.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.77.0.tgz#e736c69aff9fae4a4e6dae60a979eee9c942f321"
-  integrity sha512-eGj4HNfXqBWtSnvItNkn7B6icqH14i3CiCGbzMKs3BAPTq62pp9NBYsBgyN4cA+qssqo9r26lW4JSvlaUUWbgw==
-  dependencies:
-    chokidar ">=3.0.0 <4.0.0"
-    immutable "^4.0.0"
-    source-map-js ">=0.6.2 <2.0.0"
 
 sass@1.77.2:
   version "1.77.2"
