@@ -2,6 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { currentPost } from '@devprotocol/clubs-plugin-posts/plugin-helper'
 import Join from './Meeting/Join.vue'
+import AddToCal from './Meeting/AddToCal.vue'
 import type { Posts } from '@devprotocol/clubs-plugin-posts'
 import type { Meet } from '../types.ts'
 import { connection } from '@devprotocol/clubs-core/connection'
@@ -51,6 +52,15 @@ const redirectToUrl = (url: string | undefined) => {
 					:roomType="currentMeet.roomType"
 					:startTime="currentMeet.startTime"
 					:expiryTime="currentMeet.expiryTime"
+					class="mb-4"
+				/>
+				<AddToCal
+					:redirectToUrl="redirectToUrl"
+					:meetingLink="currentMeet.meetingLink"
+					:roomType="currentMeet.roomType"
+					:startTime="currentMeet.startTime"
+					:expiryTime="currentMeet.expiryTime"
+					:description="currentMeet.description"
 				/>
 			</section>
 		</div>
