@@ -31,16 +31,16 @@ export const formatISOTimestamp = (isoTimestamp: string) => {
 
 export const toCompactISOTimeFromISO = (isoTimestamp: string) => {
 	const date = new Date(isoTimestamp)
-	const pad = (number: number) => number.toString().padStart(2, '0');
+	const pad = (number: number) => number.toString().padStart(2, '0')
 
 	// Extract components
 	const year = date.getUTCFullYear()
-	const month = pad(date.getUTCMonth() + 1); // Months are zero-indexed
-	const day = pad(date.getUTCDate());
+	const month = pad(date.getUTCMonth() + 1) // Months are zero-indexed
+	const day = pad(date.getUTCDate())
 	const hours = pad(date.getUTCHours())
 	const minutes = pad(date.getUTCMinutes())
 	const seconds = pad(date.getUTCSeconds())
-	
+
 	return `${year}${month}${day}T${hours}${minutes}${seconds}Z`
 }
 
