@@ -29,13 +29,12 @@ export const formatISOTimestamp = (isoTimestamp: string) => {
 	return `${hours}:${minutes} ${amPm} (${day}:${month}:${year}) ${timeZone}`
 }
 
-export const isFutureTimestamp = (isoTimestamp: string) => {
+export const isFutureTimestamp = (isoTimestamp: string, currentTime: Date) => {
 	if (isoTimestamp === undefined) {
 		return true
 	}
 	const inputDate = new Date(isoTimestamp)
 
-	const currentDate = new Date()
 	// Return true if the input date is in the future, false otherwise
-	return inputDate > currentDate
+	return inputDate > currentTime
 }

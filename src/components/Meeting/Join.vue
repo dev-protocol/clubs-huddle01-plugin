@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import VideoCamera from '../Icons/VideoCamera.vue'
-import { computed } from 'vue'
 import { formatISOTimestamp, isFutureTimestamp } from '../../fixtures'
 
 const props = defineProps<{
@@ -11,21 +11,41 @@ const props = defineProps<{
 	expiryTime: string | undefined
 }>()
 
-const startTimeValid = computed(
-	() => props.startTime && !isNaN(new Date(props.startTime).getTime()),
-)
-const expiryTimeValid = computed(
-	() => props.expiryTime && !isNaN(new Date(props.expiryTime).getTime()),
-)
+const currentTime = ref(new Date())
 
-const meetingHasStarted = computed(
-	() => startTimeValid.value && !isFutureTimestamp(props.startTime as string),
-)
-const meetingIsActive = computed(
-	() =>
+// Update current time every minute
+const updateCurrentTime = () => {
+	currentTime.value = new Date()
+}
+let timer: NodeJS.Timeout | undefined
+onMounted(() => {
+	timer = setInterval(updateCurrentTime, 15000) // 15 seconds
+})
+onUnmounted(() => {
+	clearInterval(timer)
+})
+
+// Computed properties
+const startTimeValid = computed(() => {
+	return props.startTime && !isNaN(new Date(props.startTime).getTime())
+})
+const expiryTimeValid = computed(() => {
+	return props.expiryTime && !isNaN(new Date(props.expiryTime).getTime())
+})
+
+const meetingHasStarted = computed(() => {
+	return (
 		startTimeValid.value &&
-		(!expiryTimeValid.value || isFutureTimestamp(props.expiryTime as string)),
-)
+		!isFutureTimestamp(props.startTime as string, currentTime.value)
+	)
+})
+const meetingIsActive = computed(() => {
+	return (
+		startTimeValid.value &&
+		(!expiryTimeValid.value ||
+			isFutureTimestamp(props.expiryTime as string, currentTime.value))
+	)
+})
 
 const roomTypeDescription = computed(() => {
 	return `${props.roomType === 'VIDEO' ? 'Video Call' : 'Audio Space'}`
@@ -33,27 +53,22 @@ const roomTypeDescription = computed(() => {
 
 const meetingStatusMessage = computed(() => {
 	if (!startTimeValid.value) {
-		return 'Unkwown Start Time'
+		return 'Unknown Start Time'
 	}
-
 	if (meetingHasStarted.value && !meetingIsActive.value) {
 		return 'Expired'
 	}
-
 	if (!meetingHasStarted.value) {
 		return `Starts @ ${formatISOTimestamp(props.startTime as string)}`
 	}
-
 	return `Ends @ ${formatISOTimestamp(props.expiryTime as string)}`
 })
 </script>
+
 <template>
 	<button
-		v-if="
-			(startTime === undefined || !isFutureTimestamp(startTime)) &&
-			(expiryTime === undefined || isFutureTimestamp(expiryTime))
-		"
-		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border border-blue-500 rounded-full bg-[#236BFE] outline hover:outline-[#236BFE] outline-2 outline-offset-2 transition-all text-white"
+		v-if="meetingHasStarted && meetingIsActive"
+		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border border-green-500 rounded-full bg-green-500 outline hover:outline-green-500 outline-2 outline-offset-2 transition-all text-white"
 		@click="
 			() => {
 				redirectToUrl(meetingLink)
@@ -66,7 +81,15 @@ const meetingStatusMessage = computed(() => {
 	</button>
 	<div
 		v-else
-		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border border-blue-500 rounded-full bg-[#236BFE] outline hover:outline-[#236BFE] outline-2 outline-offset-2 transition-all text-white"
+		class="hs-button is-fullwidth is-large w-full gap-2 font-bold border rounded-full outline outline-2 outline-offset-2 transition-all text-white"
+		:class="{
+			'bg-gray-500': !meetingIsActive,
+			'border-gray-500': !meetingIsActive,
+			'hover:outline-gray-500': !meetingIsActive,
+			'bg-[#236BFE]': meetingIsActive,
+			'border-[#236BFE]': meetingIsActive,
+			'hover:outline-[#236BFE]': meetingIsActive,
+		}"
 	>
 		<VideoCamera :solid="true" :iconType="`${roomType}`" />
 		{{ roomTypeDescription }}
