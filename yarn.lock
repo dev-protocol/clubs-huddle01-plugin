@@ -420,35 +420,25 @@
     svelte "^5.0.0"
     vue "^3.2.0"
 
-"@devprotocol/clubs-plugin-posts@0.20.17":
-  version "0.20.17"
-  resolved "https://registry.yarnpkg.com/@devprotocol/clubs-plugin-posts/-/clubs-plugin-posts-0.20.17.tgz#5d1dfcfdca990d49b91943636adcdd6296c918cc"
-  integrity sha512-xwjUuoXaT+MKxhbpVmHhiWVzJdNBh84j+IdnUjBZtXRLb5eUpE5PHnsNq4fEkLL1p5jD3AVU/Uuva0mxkpQlPQ==
+"@devprotocol/clubs-plugin-posts@0.20.19":
+  version "0.20.19"
+  resolved "https://registry.yarnpkg.com/@devprotocol/clubs-plugin-posts/-/clubs-plugin-posts-0.20.19.tgz#a132e6ede75f1a8ac1ea7e9c1efbb47701adb346"
+  integrity sha512-OIxJn40LAScJ/vbmIV9UzVyCGbxzZtpKETuOZHOw/WAjeDXR1wiTk1F4N6J0B2RLbnKpZPc3/GCjLJVVtlozuQ==
   dependencies:
     "@boringer-avatars/vue3" "^0.2.1"
-    "@devprotocol/dev-kit" "8.6.2"
+    "@devprotocol/dev-kit" "8.7.0"
     "@devprotocol/util-ts" "4.0.0"
     bignumber.js "9.1.2"
     dayjs "^1.11.8"
     dompurify "^3.0.5"
     ethers "^6.6.4"
-    marked "13.0.2"
+    marked "15.0.3"
     nanoid "^5.0.6"
     photoswipe "5.4.4"
     ramda "0.30.1"
     redis "^4.6.7"
-    sass "1.77.8"
-    uuid "^10.0.0"
-
-"@devprotocol/dev-kit@8.6.2":
-  version "8.6.2"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.6.2.tgz#ce6beb366821418d5e3d313579e90489e011c557"
-  integrity sha512-fcneJVm/S24cruUK+CwN0aQRokdUbVteIuhriBMUrJPpwuS81vTCwRDiYHsKfWcA406OTwzzoQjbf5xXu2SQtA==
-  dependencies:
-    "@devprotocol/util-ts" "4.0.0"
-    bignumber.js "9.1.2"
-    js-base64 "^3.7.2"
-    ramda "^0.30.0"
+    sass "1.82.0"
+    uuid "^11.0.0"
 
 "@devprotocol/dev-kit@8.7.0":
   version "8.7.0"
@@ -2523,21 +2513,6 @@ character-entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/character-entities/-/character-entities-2.0.2.tgz#2d09c2e72cd9523076ccb21157dff66ad43fcc22"
   integrity sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==
 
-"chokidar@>=3.0.0 <4.0.0":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
-  integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
-  dependencies:
-    anymatch "~3.1.2"
-    braces "~3.0.2"
-    glob-parent "~5.1.2"
-    is-binary-path "~2.1.0"
-    is-glob "~4.0.1"
-    normalize-path "~3.0.0"
-    readdirp "~3.6.0"
-  optionalDependencies:
-    fsevents "~2.3.2"
-
 chokidar@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.6.0.tgz#197c6cc669ef2a8dc5e7b4d97ee4e092c3eb0d5b"
@@ -3864,11 +3839,6 @@ ignore@^5.3.1:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
 
-immutable@^4.0.0:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.3.5.tgz#f8b436e66d59f99760dc577f5c99a4fd2a5cc5a0"
-  integrity sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==
-
 immutable@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-5.0.2.tgz#bb8a987349a73efbe6b3b292a9cbaf1b530d296b"
@@ -4374,10 +4344,10 @@ markdown-table@^3.0.0:
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-3.0.4.tgz#fe44d6d410ff9d6f2ea1797a3f60aa4d2b631c2a"
   integrity sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==
 
-marked@13.0.2:
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-13.0.2.tgz#d5d05bd2683a85cb9cc6afbe5240e3a8bffcb92a"
-  integrity sha512-J6CPjP8pS5sgrRqxVRvkCIkZ6MFdRIjDkwUwgJ9nL2fbmM6qGQeB2C16hi8Cc9BOzj6xXzy0jyi0iPIfnMHYzA==
+marked@15.0.3:
+  version "15.0.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-15.0.3.tgz#f75ae6ca71aeeaea0cfa2c2f120016ac8373aede"
+  integrity sha512-Ai0cepvl2NHnTcO9jYDtcOEtVBNVYR31XnEA3BndO7f5As1wzpcOceSUM8FDkNLJNIODcLpDTWay/qQhqbuMvg==
 
 marked@^10.0.0:
   version "10.0.0"
@@ -5850,15 +5820,6 @@ sass-formatter@^0.7.6:
   dependencies:
     suf-log "^2.5.3"
 
-sass@1.77.8:
-  version "1.77.8"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.77.8.tgz#9f18b449ea401759ef7ec1752a16373e296b52bd"
-  integrity sha512-4UHg6prsrycW20fqLGPShtEvo/WyHRVRHwOP4DzkUrObWoWI05QBSfzU71TVB7PFaL104TwNaHpjlWXAZbQiNQ==
-  dependencies:
-    chokidar ">=3.0.0 <4.0.0"
-    immutable "^4.0.0"
-    source-map-js ">=0.6.2 <2.0.0"
-
 sass@1.82.0:
   version "1.82.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.82.0.tgz#30da277af3d0fa6042e9ceabd0d984ed6d07df70"
@@ -6598,11 +6559,6 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
-
-uuid@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
-  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 uuid@^11.0.0:
   version "11.0.3"
